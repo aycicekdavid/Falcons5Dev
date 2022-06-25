@@ -1,0 +1,7 @@
+//SELECT COUNT() FROM Contact
+
+//SELECT COUNT(Id) FROM Contact
+
+//SELECT COUNT() FROM Contact WHERE name like '%j%'
+
+//SELECT COUNT() FROM Salesforce_Project__c

@@ -1,0 +1,9 @@
+.main{
+    background-color: rgba(250, 181, 209, 0.391);
+    border-style: 15px;
+    border-style: double;
+    border-color: aquamarine;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 15px;
+}

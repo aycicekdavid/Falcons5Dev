@@ -1,0 +1,20 @@
+.classA {
+  color: rgb(243, 237, 237);
+  background: black;
+  font-weight: bold;
+}
+
+h1 {
+  color: red;
+  font-weight: bold;
+}
+
+.main-div {
+  background-color: rgb(181, 244, 199);
+  border: 2px;
+  border-color: blue;
+  border-style: solid;
+  border-radius: 5px;
+  margin: 30px;
+  padding: 40px;
+}

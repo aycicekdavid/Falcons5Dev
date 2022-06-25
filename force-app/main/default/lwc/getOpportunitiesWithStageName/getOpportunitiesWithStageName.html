@@ -1,0 +1,18 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card title="Wire Apex With Params" icon-name="standard:opportunity">
+        <div class="slds-var-m-around_medium">
+            <!--display data using datatable-->
+            <template if:true={opportunities.data}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={opportunities.data}
+                    columns={columns}>
+                </lightning-datatable>
+            </template>
+            <template if:true={opportunities.error}>
+                {opportunities.error}
+            </template>
+        </div>
+    </lightning-card>
+</template>

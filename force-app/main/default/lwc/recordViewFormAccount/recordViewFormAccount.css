@@ -1,0 +1,9 @@
+.main{
+    background-color: rgba(253, 253, 197, 0.874);
+    border-style: 15px;
+    border-style: double;
+    border-color: rgba(244, 229, 194, 0.779);
+    margin: 15px;
+    padding: 15px;
+    border-radius: 15px;
+}

@@ -1,0 +1,28 @@
+//Write SOQL for following:
+//1 - Show the records for Account object, whose name does contains 'am' in the name field.
+//2 - Prepare the list of records whose account number is not null
+//3 - Retrieve the list of 10 contact records in the descending order of the date these records were created
+//4 - Show the list of 10 records of opportunity object in the ascending order of the date these records were modified
+//5 - Give the count of the records for the Opportunity object
+//6 - Give the count of the records for the account object, whose name does contains 'am' 
+
+//SELECT name FROM Account WHERE name != LIKE '%am%'
+
+//SELECT name, accountNumber FROM Account WHERE AccountNumber != NULL
+
+//SELECT name, CreatedDate FROM Contact ORDER BY CreatedDate DESC LIMIT 10
+
+//SELECT name, LastModifiedDate FROM Opportunity ORDER BY LastModifiedDate ASC LIMIT 10
+
+//SELECT COUNT() FROM Opportunity
+
+//SELECT COUNT(Name) FROM Account WHERE Name LIKE '%am%'
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+//Write the SOQL query for the following requirements:
+//1. Fetch Account Name, Account Number and Record Id for all the accounts present in your org.
+//2. Fetch Account Id, Contact First Name, Contact Last Name and Email Address for all the contacts present in your org.
+//3. Fetch all the account records (include any number of fields) and order them based on the Account Name in the ascending order.
+//4. Fetch all the accounts which have no Phone number populated.
+//5. Find all contacts which have no account attached to them.
+//6. Find out the count of all opportunities present in the Org.
+
+//SELECT Name, accountNumber, Id FROM Account
+
+//SELECT AccountId, firstName, lastName, email FROM Contact
+
+//SELECT Id, Name FROM Account ORDER BY Name
+
+//SELECT Id, Name, Phone FROM Account WHERE Phone = NULL
+
+//SELECT AccountId, Name, Phone, Id FROM Contact WHERE AccountId = NULL
+
+//SELECT COUNT() FROM Opportunity 
+
+//Write the SOQL query for the following requirements:
+//1. Fetch all the opportunities which have stage as Closed Won and Amount more than or equal to 35000.
+//2. Fetch all the contacts and order them by their last name in descending order.
+//3. Find the count of opportunities which have Amount less than 5000.
+//4. Find the Top 10 opportunities based on Amount value.
+//5. Find lower 20 opportunities based on Amount value which are not set to Closed Won and not to Closed Lost stage.
+
+//SELECT StageName, Amount
+//FROM Opportunity 
+//WHERE StageName = 'Closed Won' 
+//AND Amount >= 35000
+//ORDER BY Amount
+
+//SELECT LastName, Id
+//FROM Contact 
+//ORDER BY LastName DESC
+
+//SELECT COUNT()
+//FROM Opportunity 
+//WHERE Amount < 5000
+
+//SELECT Amount, Name
+//FROM Opportunity 
+//ORDER BY Amount DESC
+//LIMIT 10
+
+//5. Find lower 20 opportunities based on Amount value which are not set to Closed Won and not to Closed Lost stage.
+
+SELECT StageName, Amount
+FROM Opportunity 
+WHERE StageName != 'Closed Won'
+AND StageName != 'Closed Lost'
+ORDER BY Amount
+LIMIT 20
+

@@ -1,0 +1,11 @@
+.main{
+    background-color: rgba(236, 247, 182, 0.583);
+    border-radius: 15px;
+    border-style: double;
+    border-color: rgb(0, 0, 0);
+    margin: 2px;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+   
+    
+}

@@ -1,0 +1,6 @@
+//SELECT id, name, phone, (SELECT id, lastName FROM Contacts) 
+//FROM Account
+
+SELECT Id, Name, Project_Name__c, (SELECT Name, Subject__c, Priority__c FROM Salesforce_Tickets__r)FROM Salesforce_Project__c
+
+

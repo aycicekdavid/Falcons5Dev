@@ -1,0 +1,11 @@
+1- Write query to get an Account record last 30 days activity histories
+
+SELECT Id,(SELECT Id, Subject, CreatedDate FROM ActivityHistories WHERE CreatedDate = LAST_N_DAYS:30) FROM Account WHERE Id != NULL
+
+2- write query  to see who has viewed recently any account in your org.
+
+SELECT Id, Name,LastViewedDate FROM RecentlyViewed WHERE Type = 'Account' ORDER BY LastViewedDate DESC
+
+3- Write query that returns subtotals of accounts for each combination of Type and BillingCountry.
+
+SELECT Type, BillingCountry,GROUPING(Type) grpType, GROUPING(BillingCountry) grpCountry, COUNT(Id)accnts FROM Account GROUP BY CUBE(Type, BillingCountry) ORDER BY GROUPING(Type), GROUPING(BillingCountry)

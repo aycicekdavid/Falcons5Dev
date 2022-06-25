@@ -1,0 +1,2 @@
+CryptoInfo.showPrice('PTH');
+

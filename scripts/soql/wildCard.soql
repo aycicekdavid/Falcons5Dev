@@ -1,0 +1,3 @@
+SELECT Id, Name, MailingCity, MailingCountry
+FROM Contact 
+WHERE Name LIKE '%a%'

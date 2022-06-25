@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Imperative Apex">
+        <div class="slds-var-m-around_medium">
+
+            <lightning-input type="search" label="start entering search keys to see the results..." value={searchWord} onkeyup={searchHandler}></lightning-input>
+
+            <template if:true={accounts}></template>
+
+            <div>Search Results</div>
+
+            <template for:each={accounts} for:item="acc">
+                <div key={acc.Id} class="slds-var-m-bottom_small">
+                    <strong>Name: </strong>{acc.Name}</strong><br/>
+                    <strong>Type: </strong>{acc.Type}</strong><br/>
+                    <strong>Industry: </strong>{acc.Industry}</strong><br/>
+                    <strong>Revenue: </strong>{acc.AnnualRevenue}</strong><br/>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

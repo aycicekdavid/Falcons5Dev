@@ -1,0 +1,19 @@
+<template>
+  <lightning-card title="Conditional Rendering2">
+    <div class="slds-var-m-around_medium">
+      <lightning-button
+        variant="destructive"
+        label="Show Content"
+        onclick={handleClick}
+      >
+      </lightning-button>
+
+      <template if:true={showContent}>
+        <div class="slds-var-m-around_small"></div>
+        Hello there <br />
+        I am learning LWC from SoftInnovas. <br />
+        It's a great experience!
+      </template>
+    </div>
+  </lightning-card>
+</template>

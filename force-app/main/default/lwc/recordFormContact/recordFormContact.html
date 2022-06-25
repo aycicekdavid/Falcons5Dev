@@ -1,0 +1,15 @@
+<template>
+  <lightning-card title="Lightning Record Form" icon-name="standard:contact">
+    <div class="main">
+      <div class="slds-var-m-around_medium">
+        <lightning-record-form
+          record-id={recordId}
+          object-api-name={objectName}
+          fields={fields}
+          columns="2"
+          onsuccess={showSuccessMsg}>
+        </lightning-record-form>
+      </div>
+    </div>
+  </lightning-card>
+</template>

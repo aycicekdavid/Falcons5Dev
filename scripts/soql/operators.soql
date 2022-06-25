@@ -1,0 +1,16 @@
+
+SELECT ID, Name, Phone FROM Account where Phone != NULL
+
+SELECT ID, Name, Status__c FROM Salesforce_Project__c where Status__c != 'New'
+
+SELECT ID, Name, Phone FROM Account where Phone != NULL and AccountNumber != NULL
+
+SELECT ID, Name, Phone, AccountNumber FROM Account where Phone != NULL and AccountNumber != NULL
+
+SELECT ID, Name, Phone, AccountNumber, WebSite FROM Account WHERE(Phone != NULL or WebSite != null) and AccountNumber != NULL
+
+SELECT ID, Name, Status__c FROM Salesforce_Project__c where Status__c != 'New'
+
+SELECT id, name, status__c FROM salesforce_Project__c where name != null or status__c != null
+
+SELECT id, name, subject__c, status__c, priority__c FROM salesforce_Ticket__c WHERE status__c != '' and priority__c = 'High'

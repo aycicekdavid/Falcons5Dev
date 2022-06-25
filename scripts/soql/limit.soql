@@ -1,0 +1,5 @@
+SELECT name, industry 
+FROM Account 
+WHERE Industry = 'Energy' 
+ORDER BY name asc 
+LIMIT 2 

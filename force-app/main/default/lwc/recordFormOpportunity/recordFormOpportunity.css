@@ -1,0 +1,9 @@
+.main{
+    background-color: rgb(252, 241, 211);
+    border-style: 15px;
+    border-style: double;
+    border-color: rgb(83, 80, 76);
+    margin: 15px;
+    padding: 15px;
+    border-radius: 15px;
+}

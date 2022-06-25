@@ -1,0 +1,8 @@
+//SELECT id, name, account.Name, account.industry FROM Contact WHERE Account.industry = 'Energy'
+
+//SELECT Id, Name, Subject__c, priority__c, Salesforce_project__r.
+//Project_Name__c, //Salesforce_project__r.status
+
+SELECT Id, Name, Subject__c, Salesforce_Project_SP__r.Name, Salesforce_Project_SP__r.Status__c FROM Salesforce_Ticket__c
+
+
