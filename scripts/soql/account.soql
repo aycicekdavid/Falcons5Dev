@@ -6,6 +6,6 @@
 //SELECT Id, Name FROM Account
 
 //SELECT id, name, project_name__c FROM Salesforce_Project__c
-
-SELECT lastname, Account.Name
+//Some changes happend for Git test purpose...
+SELECT firstName, lastname, Account.Name
 FROM Contact WHERE Account.Name != null and account.name like '%H%'
