@@ -1,10 +1,11 @@
 @isTest
 public class DmlDemoTest {
+
   @isTest
   public static void dmlInserDemo_stndObjectTest() {
     DmlDemo.dmlInserDemo_stndObject();
 
-    List<Account> accList = [SELECT id, Name FROM account];
+    List<Account> accList = [select id, name from Account];
 
     System.assertEquals('SoftInnovas', accList[0].Name);
     System.assertEquals(1, accList.size());
