@@ -21,11 +21,7 @@ public class DmlDemo {
   }
 
   public static void dmlUpdateDemo_2() {
-    Account acc = [
-      SELECT id, name
-      FROM account
-      WHERE name = 'SoftInnovas Inc.'
-      LIMIT 1
+    Account acc = [SELECT id, name FROM account    WHERE name = 'SoftInnovas Inc.' LIMIT 1
     ];
 
     Contact cnt = new Contact();
@@ -41,12 +37,8 @@ public class DmlDemo {
   }
 
   public static void dmlUpdateDemo_3() {
-    Account acc = [
-      SELECT id, name
-      FROM account
-      WHERE name = 'SoftInnovas2'
-      LIMIT 1
-    ];
+    Account acc = [SELECT id, name FROM account
+      WHERE name = 'SoftInnovas2' LIMIT 1];
 
     System.debug('fetch acc ' + acc);
 
@@ -75,12 +67,7 @@ public class DmlDemo {
   }
 
   public static void dmlUpdateDemo_2_co() {
-    salesforce_project__c sp = [
-      SELECT id
-      FROM salesforce_project__c
-      ORDER BY createdDate DESC
-      LIMIT 1
-    ];
+    salesforce_project__c sp = [SELECT id FROM salesforce_project__c ORDER BY createdDate DESC  LIMIT 1];
 
     salesforce_ticket__c st = new salesforce_ticket__c();
     st.Subject__c = 'learn apex';
@@ -118,11 +105,7 @@ public class DmlDemo {
   }
 
   public static void dmlMultipleRecordUpdate_right() {
-    List<Account> listAcc = [
-      SELECT id, name
-      FROM Account
-      WHERE CreatedDate = TODAY
-    ];
+    List<Account> listAcc = [SELECT id, name FROM Account WHERE CreatedDate = TODAY ];
 
     List<Account> updateAccounts = new List<Account>();
 
@@ -137,7 +120,7 @@ public class DmlDemo {
   }
 
   public static void deleteAcc() {
-    List<Account> listAcc = [SELECT id, name FROM Account WHERE name = TODAY];
+    List<Account> listAcc = [SELECT id, name FROM Account WHERE CreatedDate = TODAY];
 
     delete listAcc;
 
