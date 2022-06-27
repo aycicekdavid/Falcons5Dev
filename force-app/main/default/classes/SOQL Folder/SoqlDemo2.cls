@@ -6,16 +6,15 @@ public class SoqlDemo2 {
 
     for (contact eachContact : listCnt) {
       string accName = eachContact.account.name;
-      system.debug('contact name is ' + eachContact.name + 
-      ', its acc is ' + accName);
+      system.debug('\n Contact name: ' + eachContact.name + 
+      ' \n Account name: ' + accName + ' \n Industry: ' + eachContact.account.Industry);
     }
   }
 
 
   public static void sampleSoql4() {
 
-    List<account> accWithOppList = new List<account>();
-    accWithOppList = [SELECT Name, annualRevenue, (SELECT Name, amount FROM opportunities WHERE stageName = 'Closed Won')
+    List<account> accWithOppList = [SELECT Name, annualRevenue, (SELECT Name, amount FROM opportunities WHERE stageName = 'Closed Won')
     FROM account];
 
     for (account acc : accWithOppList) {
