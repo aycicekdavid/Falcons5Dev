@@ -8,18 +8,7 @@ public class OpportunityTriggerHandler {
   // *Write a Trigger to stop creating or updating Opportunities with Account having “Working in = Emea” and Already 2 Closed Won Opportunity under same Account.
 
   public static void getTotalProductQty(List<Opportunity> triggerNew) {
-    List<Account> accList = [
-      SELECT
-        id,
-        name,
-        (
-          SELECT id, stageName, TotalOpportunityQuantity
-          FROM Opportunities
-          WHERE stageName = 'Closed Won'
-        )
-      FROM Account
-      WHERE Working_in__c = 'EMEA'
-    ];
+    List<Account> accList = [SELECT id, name,(SELECT id, stageName, TotalOpportunityQuantity FROM Opportunities          WHERE stageName = 'Closed Won') FROM Account WHERE Working_in__c = 'EMEA'];
 
     for (opportunity opp : triggerNew) {
       for (Account acc : accList) {
@@ -163,16 +152,7 @@ public class OpportunityTriggerHandler {
 
   public static void debugMessage(List<Opportunity> numOfOpps) {
     for (Opportunity opp : numOfOpps) {
-      System.debug(
-        'Opportunity name: ' +
-        opp.Name +
-        ' - ' +
-        'Close Date: ' +
-        opp.CloseDate +
-        ' - ' +
-        'Amount: ' +
-        opp.Amount
-      );
+      System.debug('Opportunity name: ' + opp.Name +' - ' +'Close Date: ' + opp.CloseDate +' - ' +'Amount: ' +opp.Amount);
     }
   }
 
@@ -188,30 +168,16 @@ public class OpportunityTriggerHandler {
     for (Opportunity opp : triggerNew) {
       Opportunity oldValue = triggerOldMap.get(opp.Id);
 
-      System.debug(
-        'Old Amount: ' +
-        oldValue.Amount +
-        ' New Amount: ' +
-        opp.Amount
-      );
+      System.debug('Old Amount: ' + oldValue.Amount + ' New Amount: ' + opp.Amount);
 
       if (oldValue.CloseDate != opp.CloseDate) {
-        System.debug(
-          'Old Date: ' +
-          oldValue.CloseDate +
-          'New Date: ' +
-          opp.CloseDate
-        );
+        System.debug('Old Date: ' + oldValue.CloseDate +'New Date: ' + opp.CloseDate);
       }
 
       if (oldValue.StageName != opp.StageName) {
-        System.debug(
-          'Description: ' +
-          opp.Description +
-          ' Opportunity Name: ' +
-          opp.Name
-        );
+        System.debug('Description: ' + opp.Description +' Opportunity Name: ' + opp.Name);
       }
     }
   }
+
 }
