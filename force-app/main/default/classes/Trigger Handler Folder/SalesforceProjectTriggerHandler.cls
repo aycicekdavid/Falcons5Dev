@@ -37,16 +37,12 @@ public class SalesforceProjectTriggerHandler {
     }
   }
 
-  //=================================================================================
+  //====================================================
   @future
   public static void updateProjectDescription(set<id> setSpId) {
     //we have ids, so fetch project records to update description
 
-    List<salesforce_project__c> lstSP = [
-      SELECT id, description__c
-      FROM Salesforce_project__c
-      WHERE id IN :setSpId
-    ];
+    List<salesforce_project__c> lstSP = [SELECT id, description__c FROM Salesforce_project__c WHERE id IN :setSpId];
 
     system.debug('project records ' + lstSP);
 
@@ -56,7 +52,7 @@ public class SalesforceProjectTriggerHandler {
 
     update lstSP;
   }
-  //=================================================================================
+  //====================================================
 
   //AFTER EVENT EXAMPLE: When create a parent, automatically create child record.
 
@@ -76,5 +72,5 @@ public class SalesforceProjectTriggerHandler {
     if (newList.size() > 0)
       insert newList;
   }
-  //=================================================================================
+  //====================================================
 }
