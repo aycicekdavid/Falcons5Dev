@@ -1,9 +1,4 @@
-trigger AccountTrigger on Account(
-  before insert,
-  before update,
-  after update,
-  after insert
-) {
+trigger AccountTrigger on Account(before insert, before update, after update, after insert) {
   //========================================================================
   // if(Trigger.isAfter && (Trigger.isInsert || Trigger.isUpdate)){
   //   AccountTriggerHandler.createOppIfAccNoOpp(Trigger.new);
@@ -61,15 +56,15 @@ trigger AccountTrigger on Account(
   //   AccountTriggerHandler.smallGroupAcc(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
   // }
   //========================================================================
-  // if (trigger.isBefore) {
-  //   system.debug('before insert/update trigger on account object');
-  //   AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
-  // }
+  if (trigger.isBefore) {
+    system.debug('before insert/update trigger on account object');
+    AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+  }
   //========================================================================
-  //  if(Trigger.isAfter && Trigger.isUpdate) {
-  //    //call updateVIPforAllContacts method.
-  //    AccountTriggerHandler.updateVIPForAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
-  //   }
+   if(Trigger.isAfter && Trigger.isUpdate) {
+     //call updateVIPforAllContacts method.
+     AccountTriggerHandler.updateVIPForAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
 
   //AFTER EVENT TRIGGER EXAMPLE
 
