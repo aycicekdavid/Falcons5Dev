@@ -434,11 +434,8 @@ public class AccountTriggerHandler {
   // Write Trigger on Account to Update the Associated Contact Account Name Null Whenever Account Record is Updated
 
   public static void updateAssociatedContact(List<Account> newTrigger) {
-    list<Contact> relatedContact = [
-      SELECT id, LastName
-      FROM Contact
-      WHERE AccountId IN :newTrigger
-    ];
+    list<Contact> relatedContact = [SELECT id, LastName FROM Contact WHERE AccountId IN :newTrigger];
+    
     list<Contact> updatedContacts = new List<Contact>();
     list<Contact> updatedContacts1 = new List<Contact>();
 
