@@ -74,26 +74,39 @@ public class SoqlDemo2Test {
 
       opp.Name = acc1.Name + 'Opp1';
       opp.Amount = acc1.AnnualRevenue;
-      opp.StageName = 'Closed Lost';
-      opp.CloseDate = Date.today()+20;      opp.AccountId = acc1.id;
+      opp.StageName = 'Closed Lost';   
+      opp.CloseDate = Date.today()+20;
+      opp.AccountId = acc1.id;
       oppList.add(opp);
 
-      opp.Name = acc2.Name + 'Opp2';
-      opp.Amount = acc2.AnnualRevenue;
-      opp.StageName = 'Closed Won';
-      opp.AccountId = acc2.id;
-      oppList.add(opp);
+      Opportunity opp2 = new Opportunity();
+      opp2.Name = acc2.Name + 'Opp2';
+      opp2.Amount = acc2.AnnualRevenue;
+      opp2.StageName = 'Closed Won';
+      opp2.CloseDate = Date.today()+20;
+      opp2.AccountId = acc2.id;
+      oppList.add(opp2);
 
-      opp.Name = acc3.Name + 'Opp3';
-      opp.Amount = acc3.AnnualRevenue;
-      opp.StageName = 'Closed Lost';
-      opp.AccountId = acc3.id;
-      oppList.add(opp);
+      Opportunity opp3 = new Opportunity();
+      opp3.Name = acc3.Name + 'opp33';
+      opp3.Amount = acc3.AnnualRevenue;
+      opp3.StageName = 'Closed Lost';
+      opp3.CloseDate = Date.today()+20;
+      opp3.AccountId = acc3.id;
+      oppList.add(opp3);
 
-    insert opp;
+    insert oppList;
 
     Test.startTest();
     SoqlDemo2.sampleSoql4();
     Test.stopTest();
+
+    Integer counter = 0;
+    for(Opportunity op : oppList){
+      if(op.StageName == 'Closed Won'){
+        counter++;
+      }
+    }
+    System.assertEquals(1, counter);
   }
 }
