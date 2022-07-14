@@ -1,40 +1,38 @@
-public class SalesforceProjectTriggerHandler {
-  //=================================================================================
-  //While updating Salesfoce Project's status = 'Completed'. It should not allow user to mark Salesforce Project as complete, if any ticket of that project not completed. BU CODE BEKLENDIGI GIBI CALISMIYOR. NEEDS FIXING.
+public with sharing class SalesforceProjectTriggerHandler {
 
-  public static void spCompleteStatus(
-    list<salesforce_project__c> spTriggerNew,
-    list<salesforce_project__c> spTriggerOld,
-    map<id, salesforce_project__c> spTriggerNewMap,
-    map<id, salesforce_project__c> spTriggerOldMap
-  ) {
+ //BU CODE BEKLENDIGI GIBI CALISMIYOR. NEEDS FIXING.
+
+  public static void spCompleteStatus(list<Salesforce_Project__c> spTriggerNew, list<Salesforce_Project__c> spTriggerOld, map<id, Salesforce_Project__c> spTriggerNewMap, map<id, Salesforce_Project__c> spTriggerOldMap) {
+
     set<id> spIds = new Set<id>();
-    for (Salesforce_project__c spRecord : spTriggerNew) {
-      if (
-        spRecord.status__c == 'Completed' &&
-        spTriggerOldMap.get(spRecord.id).status__c !=
-        spTriggerNewMap.get(spRecord.id).status__c
-      ) {
+
+    for (Salesforce_Project__c spRecord : spTriggerNew) {
+      
+      if (spRecord.status__c == 'Completed' && spTriggerOldMap.get(spRecord.id).status__c != 'Complete') {
+
         spIds.add(spRecord.id);
       }
     }
+    System.debug('SpIds ' + spIds);
 
-    List<Salesforce_ticket__c> listST = [
-      SELECT id, status__c, salesforce_project_SP__c
-      FROM Salesforce_ticket__c
-      WHERE salesforce_project_SP__c IN :spIds AND status__c != 'Completed'
-    ];
+    if(!spIds.isEmpty()){
+      updateTicketStatusCompleted(spIds);
+    }
+  }
+
+  @future
+  public static void updateTicketStatusCompleted(Set<id> spIds) {
+      
+    List<Salesforce_ticket__c> listST = [SELECT id, status__c, salesforce_project_SP__c FROM Salesforce_ticket__c
+    WHERE salesforce_project_SP__c IN :spIds AND status__c != 'Completed'];
+
+    System.debug('Tickets ' + listST);
 
     for (salesforce_ticket__c stRecord : listST) {
-      if (spIds.contains(stRecord.salesforce_project_SP__c)) {
-        Salesforce_project__c sp = spTriggerNewMap.get(
-          stRecord.salesforce_project_SP__c
-        );
-        stRecord.addError(
-          'Cannot complete project because all its ticket are not completed.'
-        );
-      }
+
+      stRecord.status__c = 'Completed';
     }
+    update listST;
   }
 
   //====================================================
