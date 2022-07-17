@@ -27,4 +27,5 @@ public class SalesforceTriggerHandlerTest {
 
     system.assert(sps[0].Description__c.contains('Future'));
   }
+
 }
