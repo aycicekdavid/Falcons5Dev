@@ -1,6 +1,5 @@
 public with sharing class SalesforceProjectTriggerHandler {
 
- //BU CODE BEKLENDIGI GIBI CALISMIYOR. NEEDS FIXING.
 
   public static void spCompleteStatus(list<Salesforce_Project__c> spTriggerNew, list<Salesforce_Project__c> spTriggerOld, map<id, Salesforce_Project__c> spTriggerNewMap, map<id, Salesforce_Project__c> spTriggerOldMap) {
 
