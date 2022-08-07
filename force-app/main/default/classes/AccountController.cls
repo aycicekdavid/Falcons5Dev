@@ -18,10 +18,8 @@ public with sharing class AccountController {
     //IMPERATIVE: get all the accounts whose name contains the given search key
     @AuraEnabled
     public static List<Account> searchAccounts(String searchKey) {
-
         searchKey = '%' + searchKey + '%';//%est%
-
-        return [SELECT Id, Name, Type, Industry, AnnualRevenue, AccountNumber from Account WHERE Name LIKE :searchKey with SECURITY_ENFORCED];
+        return [select Id, Name, Type, Industry, AnnualRevenue, AccountNumber from Account WHERE Name LIKE :searchKey with SECURITY_ENFORCED];
     }
   
 
