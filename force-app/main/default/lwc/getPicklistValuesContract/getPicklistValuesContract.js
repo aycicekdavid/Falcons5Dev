@@ -44,6 +44,4 @@ export default class GetPicklistValuesContract extends LightningElement {
             value : item.value
         }));
     }
-
-
 }

@@ -10,16 +10,18 @@ public class AccountManage {
   //   - the Description of the record will be ==> Jimmy Thakkar2022-02-12T10:53:35.000+0000
 
   public static List<Account> updateRecords(List<Account> accountHandler) {
+      
     List<Account> newAccList = new List<Account>();
 
     for (Account eachAcc : accountHandler) {
+
       Account newAcc = new Account();
       newAcc.id = eachAcc.Id;
       newAcc.Description = eachAcc.Name + ' ' + eachAcc.CreatedDate;
       newAccList.add(newAcc);
       System.debug(eachAcc.Name + ' ' + eachAcc.CreatedDate);
     }
-
+    
     return newAccList;
   }
 }

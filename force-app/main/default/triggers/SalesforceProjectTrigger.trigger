@@ -7,9 +7,9 @@ trigger SalesforceProjectTrigger on Salesforce_project__c(before insert, before 
   //   System.debug('Sp Ids ' + setId);
   // }
 
-  if(Trigger.isAfter && Trigger.isUpdate){
-    SalesforceProjectTriggerHandler.spCompleteStatus(Trigger.new,Trigger.old, Trigger.oldMap, Trigger.newMap);
-  }
+  // if(Trigger.isAfter && Trigger.isUpdate){
+  //   SalesforceProjectTriggerHandler.spCompleteStatus(Trigger.new,Trigger.old, Trigger.oldMap, Trigger.newMap);
+  // }
 
   //====================================================
   // if (Trigger.isBefore && Trigger.isupdate) {
@@ -22,7 +22,7 @@ trigger SalesforceProjectTrigger on Salesforce_project__c(before insert, before 
   // }
   //====================================================
   //When we create new Salesforce Project, then create new 'default' Salesforce Ticket automatically.
-  // if(Trigger.isAfter && Trigger.isInsert){
-  //   SalesforceProjectTriggerHandler.createDefaultSFTicketAutomatically(Trigger.new);
-  // }
+  if(Trigger.isAfter && Trigger.isInsert){
+    SalesforceProjectTriggerHandler.createDefaultSFTicketAutomatically(Trigger.new);
+  }
 }

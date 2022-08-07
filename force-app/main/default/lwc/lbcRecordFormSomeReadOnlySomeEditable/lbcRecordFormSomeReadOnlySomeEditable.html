@@ -4,7 +4,11 @@
   
         <div class="slds-var-m-around_medium">
 
-            <lightning-record-edit-form record-id={recordId} object-api-name={objectName} onsuccess={successHandler}>
+            <lightning-record-edit-form
+
+                record-id={recordId}
+                object-api-name={objectName}
+                onsuccess={successHandler}>
 
                 <lightning-messages></lightning-messages>
 
@@ -21,14 +25,23 @@
 
             <div class="slds-align_absolute-center slds-var-m-top_large">
 
-                <lightning-button type="reset" label="Cancel" variant="neutral" class="slds-var-m-right_small"></lightning-button>
+                <lightning-button
+                    type="reset"
+                    label="Cancel"
+                    variant="neutral"
+                    class="slds-var-m-right_small" >
+                </lightning-button>
 
-                <lightning-button type="submit" label="Save" variant="brand"></lightning-button>
+                <lightning-button
+                    type="submit"
+                    label="Save"
+                    variant="brand"
+                ></lightning-button>
 
             </div>
         
         </div>
-
+        
     </lightning-card>
 
   </template>

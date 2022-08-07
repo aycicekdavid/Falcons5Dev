@@ -9,9 +9,11 @@ export default class ChildModal extends LightningElement {
     }
     topDivHandler(){
         console.log("dev handler which is a step up to button has been called");
+
     }
 
     divHandler(){
         console.log("dev handler which is 2 step up to button has been called");
+
     }
 }

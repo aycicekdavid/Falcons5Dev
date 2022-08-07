@@ -2,7 +2,6 @@ public with sharing class AccountQueueableExample implements Queueable {
     public List<Account> accList;
     //parameterized cunstructor
     public AccountQueueableExample(List<Account> accList){
- 
         this.accList = accList;
     }
 

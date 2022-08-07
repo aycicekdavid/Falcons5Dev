@@ -1,5 +1,8 @@
 public class MapDemo {
-  public static String retrieveMonth(Integer m) {
+
+
+public static String retrieveMonth(Integer m) {
+
     String month = '';
 
     Map<Integer, String> monthmap = new Map<Integer, String>();
@@ -16,13 +19,12 @@ public class MapDemo {
     monthmap.put(11, 'November');
     monthmap.put(12, 'December');
 
-    Boolean keyExist = monthmap.containsKey(m);
-
-    if (keyExist)
-      month = monthmap.get(m);
-    else
-      month = 'No such month exist. Please behave!';
+    month = monthmap.get(m);
 
     return month;
-  }
+    
+}
+
+
+    
 }

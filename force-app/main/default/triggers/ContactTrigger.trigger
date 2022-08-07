@@ -1,12 +1,5 @@
-trigger ContactTrigger on Contact(
-  before insert,
-  after insert,
-  before update,
-  after update,
-  before delete,
-  after delete,
-  after undelete
-) {
+trigger ContactTrigger on Contact(before insert,after insert,before update,after update,before delete,after delete,
+  after undelete) {
   //==================================================================================
   // if (Trigger.isBefore && Trigger.isDelete){
   //   ContactTriggerHandler.contactWithoutAccountDeletion(Trigger.old);
@@ -32,10 +25,10 @@ trigger ContactTrigger on Contact(
   //   ContactTriggerHandler.contactUpdateValidation1(Trigger.new);
   // }
   //==================================================================================
-  //   if(Trigger.isBefore && Trigger.isUpdate){
-  //     ContactTriggerHandler.contactUpdateValidation1(Trigger.new);
-  //     ContactTriggerHandler.contactUpdateValidation2(Trigger.new, Trigger.oldMap);
-  // }
+    if(Trigger.isBefore && Trigger.isUpdate){
+      ContactTriggerHandler.contactUpdateValidation1(Trigger.new);
+      ContactTriggerHandler.contactUpdateValidation2(Trigger.new, Trigger.oldMap);
+  }
   //==================================================================================
   //   if (trigger.isInsert)
   //   System.debug('Before contact insert trigger called.');

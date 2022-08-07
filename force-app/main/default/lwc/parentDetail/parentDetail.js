@@ -8,5 +8,4 @@ export default class ParentDetail extends LightningElement {
     parentCloseHandler(){
         this.showModal = false;
     }
-    
 }

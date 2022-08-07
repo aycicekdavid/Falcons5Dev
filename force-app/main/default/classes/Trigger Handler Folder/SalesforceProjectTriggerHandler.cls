@@ -55,19 +55,30 @@ public with sharing class SalesforceProjectTriggerHandler {
 
   //When we create new Salesforce Project (parent object), then create new 'default' Salesforce Ticket (child object) automatically.
 
-  public static void createDefaultSFTicketAutomatically(
-    List<Salesforce_Project__c> newTrigger
-  ) {
-    List<Salesforce_Ticket__c> newList = new List<Salesforce_Ticket__c>();
+  public static void createDefaultSFTicketAutomatically(List<Salesforce_Project__c> newTrigger) {
 
-    for (Salesforce_Project__c sfP : newTrigger) {
-      Salesforce_Ticket__c sfT = new Salesforce_Ticket__c();
-      sfT.Subject__c = 'Default ST';
-      sfT.Salesforce_Project_SP__c = sfP.id;
-      newList.add(sfT);
+    try {
+      List<Salesforce_Ticket__c> newList = new List<Salesforce_Ticket__c>();
+
+      //Fetch values from custom setting, assign to a variable.
+      DefaultTicketInfo__c dt = DefaultTicketInfo__c.getOrgDefaults();
+
+      for (Salesforce_Project__c sfP : newTrigger) {
+        Salesforce_Ticket__c sfT = new Salesforce_Ticket__c();
+        //sfT.Subject__c = 'Default ST';
+        sfT.Subject__c = dt.Subject__c; //comes from custom setting
+        sfT.description__c = dt.description__c;//comes from custom setting
+        sfT.priority__c = 'High';
+        sfT.Salesforce_Project_SP__c = sfP.id;
+        newList.add(sfT);
+      }
+      if (newList.size() > 0){
+        insert newList;
+      }
+    } catch (Exception ex) {
+      for(Salesforce_Project__c sfP : newTrigger){
+        sfP.addError('Error in creating Default Ticket. Please contact your administrator.');
+      }
     }
-    if (newList.size() > 0)
-      insert newList;
   }
-  //====================================================
 }

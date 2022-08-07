@@ -12,7 +12,8 @@
 
 //DmlDemo.dmlMultipleRecordInsert_right1();
 
-System.debug(([select id, Account.Name from contact where Account.Name != null]));
+//System.debug(([select id, Account.Name from contact where Account.Name != null]));
+
 
 
 

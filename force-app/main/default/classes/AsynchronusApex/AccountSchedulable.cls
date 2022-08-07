@@ -8,11 +8,12 @@ public class AccountSchedulable implements Schedulable{
         //this Apex, you can write here any Apex code.
 
         //start a new batch execution.
-
+        
         // AccountBatch ab = new AccountBatch();
         // Database.executeBatch(ab);
 
         //or we can directly write like below
         Database.executeBatch(new AccountBatch());
+
     }
 }

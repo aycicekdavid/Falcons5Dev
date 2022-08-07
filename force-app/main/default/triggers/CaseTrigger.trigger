@@ -1,23 +1,22 @@
-trigger CaseTrigger on Case(
-  before insert,
-  after insert,
-  before update,
-  after update
-) {
-  if (Trigger.isInsert) {
+trigger CaseTrigger on Case(before insert,after insert,before update,after update) {
+
+  if(Trigger.isInsert){
     system.debug('before insert case trigger');
   }
 
-  if (Trigger.isUpdate) {
-    Integer count = 0;
-    count++;
-    System.debug('count = ' + count);
-    CaseTriggerHandler.countTriggerExecution++;
-    system.debug('actual count : ' + CaseTriggerHandler.countTriggerExecution);
 
-    // CaseTriggerHandler.countRecordsUpdated += Trigger.size;
-    // System.debug('# of records updated : ' + CaseTriggerHandler.countRecordsUpdated);
-  }
+    if (trigger.isUpdate) {
+      Integer count = 0;
+      count++;
+      System.debug('count = ' + count);
+        CaseTriggerHandler.countTriggerExecution++;
+        system.debug('actual count : ' + CaseTriggerHandler.countTriggerExecution);
+
+        CaseTriggerHandler.countRecordsUpdated += Trigger.size;
+        System.debug('# of records updated : ' + CaseTriggerHandler.countRecordsUpdated);
+    }
+
+
 
   //ASSIGNMENT PART 1
 

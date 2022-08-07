@@ -1,5 +1,6 @@
-import { LightningElement } from "lwc";
+import { LightningElement } from 'lwc';
 
 export default class Countries extends LightningElement {
-  countries = ["USA", "UAE", "UK", "Turkiye", "Japan", "Chile"];
+    
+    countries = ["USA","UAE","UK","Turkiye","Japan","Chile"];
 }

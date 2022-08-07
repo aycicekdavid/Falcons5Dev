@@ -1,24 +1,25 @@
-@isTest
+@isTest 
 public class AccountInfoSqolTest {
-  @isTest
-  public static void findAccountsATest() {
-    List<Account> accList = new List<Account>();
+    @isTest 
+    public static void findAccountsATest() {
 
-    Account acc = new Account();
+        List<Account> accList = new List<Account>();
 
-    acc.name = 'Apex LLC';
-    acc.AccountNumber = 'DKS34534';
-    acc.Phone = '420950295';
-    accList.add(acc);
+        Account acc = new Account();   
 
-    insert accList;
+        acc.name = 'Apex LLC';
+        acc.AccountNumber = 'DKS34534';
+        acc.Phone = '420950295';
+        accList.add(acc);
+        
+        insert accList;
 
-    AccountInfoSqol.findAccountsA();
+        AccountInfoSqol.findAccountsA();
 
-    List<Account> aL = [SELECT name, phone, accountNumber FROM Account];
+        List<Account> aL = [select name,phone,accountNumber from Account];
 
-    test.startTest();
-    System.assertEquals('Apex LLC', al[0].Name);
-    test.stopTest();
-  }
+        test.startTest();
+        System.assertEquals('Apex LLC', al[0].Name);
+        test.stopTest();
+    }
 }

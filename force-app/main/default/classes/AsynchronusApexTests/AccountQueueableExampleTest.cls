@@ -1,4 +1,3 @@
-
 @isTest
 public with sharing class AccountQueueableExampleTest {
    @TestSetup
@@ -26,5 +25,4 @@ public with sharing class AccountQueueableExampleTest {
     Integer count = [select count() from account where name like '%SI%'];
     System.assertEquals(100, count);
    }
-   
 }

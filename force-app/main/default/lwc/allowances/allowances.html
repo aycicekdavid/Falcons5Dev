@@ -2,15 +2,16 @@
   <lightning-card title="Allowances">
     <div class="slds-var-m-around_medium">
       <template for:each={payments} for:item="pay">
-        <div key={pay.id} class="slds-var-m-bottom_small">
-          <strong>Type : </strong> {pay.type} <br />
-          <strong>Amount : </strong> {pay.amount} <br />
+        <div key={pay.id} class = "slds-var-m-bottom_small">
+          <strong>Type : </strong> {pay.type} <br/>
+          <strong>Amount : </strong> {pay.amount} <br/>
           <template if:true={pay.paid}>
-            <strong>Paid : </strong> "Yes"
+              <strong>Paid : </strong> "Yes"
           </template>
           <template if:false={pay.paid}>
-            <strong>Paid : </strong> "No"
+              <strong>Paid : </strong> "No"
           </template>
+        
         </div>
       </template>
     </div>

@@ -151,27 +151,25 @@ public class ContactTriggerHandler {
   //BEFORE EVENT EXAMPLES : VALIDATION. If we validate an object, we use before event.
 
   //If Contact's Lead Source is 'Partner Referral' then don't allow user to Update the contact.
+
   public static void contactUpdateValidation1(List<Contact> triggerNew) {
+    //Using custom label in a method.
+    string customError = System.label.contactvalidation2;
+
     for (Contact con : triggerNew) {
       if (con.LeadSource == 'Partner Referral') {
-        con.addError(
-          'When Lead Source is Partner Referral, you can not update the contact.'
-        );
+        con.addError(customError);
       }
     }
   }
   //===================================================================
 
   //If Contact's Lead Source is 'Partner Referral' then don't allow user to Update Lead Source field for any contact.
-  public static void contactUpdateValidation2(
-    List<Contact> newTrigger,
-    Map<Id, Contact> mapOld
-  ) {
+
+  public static void contactUpdateValidation2(List<Contact> newTrigger, Map<Id, Contact> mapOld) {
     for (Contact con : newTrigger) {
       if (con.LeadSource != mapOld.get(con.Id).LeadSource) {
-        con.LeadSource.addError(
-          'You can not change Lead Source value when it is Partner Referral'
-        );
+        con.LeadSource.addError('Cannot update. Go away.');
       }
     }
   }
@@ -180,12 +178,8 @@ public class ContactTriggerHandler {
   //Which object? --> contact
   //which event? --> after
 
-  public static void rollUpSummaryForLookUpField(
-    List<Contact> triggerNew,
-    List<Contact> triggerOld,
-    Map<Id, Contact> oldMap,
-    Map<Id, Contact> newMap
-  ) {
+  public static void rollUpSummaryForLookUpField(List<Contact> triggerNew,List<Contact> triggerOld,Map<Id, Contact> oldMap,Map<Id, Contact> newMap) {
+
     Set<Id> accountIds = new Set<Id>();
 
     for (Contact con : triggerNew) {

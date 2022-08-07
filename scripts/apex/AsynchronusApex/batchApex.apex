@@ -17,3 +17,9 @@ Id batchId2 = Database.executeBatch(ab, 10);
 // }
 // update ac;
 
+OpportunityTaskCreationBatch ob = new OpportunityTaskCreationBatch();
+Database.executeBatch(ob);
+
+List<Task> t = [select id from Task where subject like '%Write%'];
+delete t;
+

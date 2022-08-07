@@ -1,9 +1,11 @@
-trigger OpportunityTrigger on Opportunity(
-  before insert,
-  after insert,
-  before update,
-  after update
-) {
+trigger OpportunityTrigger on Opportunity(before insert, after insert, before update, after update) {
+
+
+  if(Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate)){
+   OpportunityTriggerHandler.updateOpportunityPoints(Trigger.new, Trigger.oldMap);
+  }
+
+  //==============================================================
   /*
     if(Trigger.isBefore && (Trigger.isInsert || Trigger.isUpdate)){
         OpportunityTriggerHandler.getTotalProductQty(Trigger.new);

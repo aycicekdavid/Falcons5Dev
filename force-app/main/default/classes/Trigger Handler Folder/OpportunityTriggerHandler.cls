@@ -1,4 +1,40 @@
 public class OpportunityTriggerHandler {
+
+//Create a new field "Points" on Opportunnity Object. Update the Points fields whenever a new opp is created or stahe name field is updated. Store the given (Prospecting --> 1, etc.) points value and Stage name mapping in custom setting so that in future if the points value changes for a particular stage name or a new stage name is introduced, we need not to change the apex code.
+
+public static void updateOpportunityPoints(List<Opportunity> oppTriggerNew, Map<Id, Opportunity> oppTriggerOldMap){
+
+  //This map comes from custom settings
+  Map<String,OppStageNamePoints__c> oppPointsCS = OppStageNamePoints__c.getAll();
+  System.debug(oppPointsCs);
+  //key is stageName here
+  //value is custom setting record
+
+  for(Opportunity opp : oppTriggerNew){
+
+    boolean updatePoints = false;
+
+    //if oldMap is null then insert
+    if(oppTriggerOldMap == null){
+      updatePoints = true;
+
+      //if oldMap value is not equal to the new value then insert.
+    }else {
+      if(oppTriggerOldMap.get(opp.id).StageName != opp.stageName){
+      updatePoints = true;
+      }
+    }
+
+    if(updatePoints){
+      OppStageNamePoints__c cp = oppPointsCS.get(opp.stageName);
+      opp.points__c = cp.points__c; //this should come from custom settings.
+    }
+  }
+}
+
+
+
+
   //================================================================
 
   // A SF Company plans to launch a product in different region (ASIA, EMEA, NA, SA) across the world. They also want to sell the products to their clients which are in ASIA,EMEA, NA and SA .
@@ -8,7 +44,7 @@ public class OpportunityTriggerHandler {
   // *Write a Trigger to stop creating or updating Opportunities with Account having “Working in = Emea” and Already 2 Closed Won Opportunity under same Account.
 
   public static void getTotalProductQty(List<Opportunity> triggerNew) {
-    List<Account> accList = [SELECT id, name,(SELECT id, stageName, TotalOpportunityQuantity FROM Opportunities          WHERE stageName = 'Closed Won') FROM Account WHERE Working_in__c = 'EMEA'];
+    List<Account> accList = [SELECT id, name,(SELECT id, stageName, TotalOpportunityQuantity FROM Opportunities       WHERE stageName = 'Closed Won') FROM Account WHERE Working_in__c = 'EMEA'];
 
     for (opportunity opp : triggerNew) {
       for (Account acc : accList) {

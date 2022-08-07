@@ -1,28 +1,30 @@
 <template>
-  <lightning-card title="My Name & Role">
-    <div class="slds-var-m-left_medium">
-      <div class="main-css">
-        <lightning-input
-          label="Enter your name:"
-          type="text"
-          value={username}
-          onkeyup={handleChange}
-        >
-        </lightning-input>
+    <lightning-card title="My Name & Role">
 
-        <lightning-combobox
-          label="Enter your role:"
-          value={role}
-          placeholder="Select progress"
-          options={roles}
-          onchange={handleChange2}
-        >
-        </lightning-combobox>
+        <div class="slds-var-m-left_medium">
 
-        <div class="slds-var-m-top_small">
-          Hello, my name is {username} and my job role is {role}
+            <div class="main-css">
+                <lightning-input 
+                    label="Enter your name:"
+                    type="text"
+                    value={username}
+                    onkeyup={handleChange}>
+                </lightning-input>
+
+                <lightning-combobox
+                    label="Enter your role:"
+                    value={role}
+                    placeholder="Select progress"
+                    options={roles}
+                    onchange={handleChange2}>
+                </lightning-combobox>
+
+                <div class="slds-var-m-top_small"> 
+                    Hello, my name is {username} and my job role is {role}
+                </div>
+            </div>
+
         </div>
-      </div>
-    </div>
-  </lightning-card>
+    </lightning-card>
+    
 </template>

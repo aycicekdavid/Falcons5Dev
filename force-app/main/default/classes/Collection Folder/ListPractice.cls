@@ -12,24 +12,24 @@ public class ListPractice {
 
   public static List<Planets> planetsList = new List<Planets>();
 
-  public String addPlanet(
-    String planetName,
-    Integer planetNumber,
-    Integer numberOfMoons
-  ) {
+  public String addPlanet(String planetName, Integer planetNumber,Integer numberOfMoons) {
+
     String message;
 
     if (planetName != null && planetName != '') {
+
       Planets planets = new Planets();
 
-      planets.name = planetName;
+      planets.name = planetName; 
       planets.planetNumber = planetNumber;
       planets.numberOfMoons = numberOfMoons;
 
       planetsList.add(planets);
 
       message = 'Planet added successfully!';
+
     } else {
+
       message = 'Planet without name cannot be added to the list!';
     }
 

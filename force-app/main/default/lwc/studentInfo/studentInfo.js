@@ -1,8 +1,9 @@
-import { LightningElement } from "lwc";
+import { LightningElement } from 'lwc';
 
 export default class StudentInfo extends LightningElement {
-  student = {
-    studentName: "Erdal",
-    studentCity: "Chicago"
-  };
+    student = {
+        studentName : "Erdal",
+        studentCity : "Chicago"
+    };
+
 }

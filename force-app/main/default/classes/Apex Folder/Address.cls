@@ -1,5 +1,7 @@
 public class Address {
-  public void homeAddress() {
+
+    public void homeAddress() {
+
     String myName = 'Erdal Aycicek';
     Integer memberOfFamily = 4;
     String houseName = 'Papatya';
@@ -25,5 +27,6 @@ public class Address {
     System.debug('Country ISO code: ' + countryISOCode);
     System.debug('Zip code: ' + zipCode);
     System.debug('Is this the current home: ' + isThisCurrentHome);
-  }
+
+    }
 }

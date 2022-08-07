@@ -11,18 +11,13 @@ public class AirlineTickets {
   public String flightNumber;
   public String seatAssigned;
 
-  public AirlineTickets(String departureCity, String arrivalCity) {
+  public AirlineTickets(String departureCity, String arrivalCity){
     this.departureCity = departureCity;
     this.arrivalCity = arrivalCity;
   }
 
   public void printTicket() {
-    system.debug(
-      'This is ticket is for the journey from ' +
-      departureCity +
-      ' to ' +
-      arrivalCity +
-      '.'
-    );
+      
+    system.debug('This is ticket is for the journey from ' + departureCity + ' to ' + arrivalCity + '.' );
   }
 }
