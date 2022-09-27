@@ -1,20 +1,10 @@
-// List<String> lstStr = new List<String>{'Test1','Test2','Test3'};
-// List<Account> listAcc = AccountHandlerInfo.insertNewAccount(lstStr);
+// ==== Updating (Opportunity) Record Types ====
 
-// insert listAcc;
-// Account accObj = new Account(Name = 'Sari Corporation LLC');
-//     System.debug('accObj name :' + accObj);
+Utilities.updateRecordTypesInAnSObject();
 
-//     insert accObj;
+// ==== Updating (Account) Record Types ====
+Utilities.updateRecordTypesInAccount();
 
-//     Id accObjId = accObj.id;
-//     System.debug('Account Id is : ' + accObjId);
-
-//DmlDemo.dmlMultipleRecordInsert_right1();
-
-//System.debug(([select id, Account.Name from contact where Account.Name != null]));
-
-
-
-
-
+// ==== Delete Unwanted Account Records ====
+List<Account> delAcc = [select id from account where name like '%Account2%'];
+delete delAcc;
