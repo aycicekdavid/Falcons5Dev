@@ -39,3 +39,11 @@ System.debug('Value at the Specified key using get function: '+value);
 // Return a set that contains all of the keys in the map
 Set <String> SetOfKeys = ProductCodeToProductName.keySet();
 System.debug('Value of Set with Keys '+SetOfKeys);
+
+List<Account> l = new List<Account>();
+List<Account> accL = [select id, description from account];
+for(Account acc : accL){
+   acc.Description = '';
+   l.add(acc);
+}
+update l;

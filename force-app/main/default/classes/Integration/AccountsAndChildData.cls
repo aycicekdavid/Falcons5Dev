@@ -1,25 +1,23 @@
-@RestResource(urlMapping = '/fetchAccountsAndChilds')
+@RestResource(urlMapping='/fetchAccountsAndChilds')
 //outer class
 global class AccountsAndChildData {
-
   @HttpGet
   global static List<Account> fetchAllAccounts() {
-    RestRequest reqInstance = RestContext.request; //fetching the url and its pieces below the url. Endpoint URL.
+    RestRequest reqInstance = RestContext.request; //fetching the url. Endpoint URL.
 
-    Map<String,String> paramMap = reqInstance.params;
+    Map<String, String> paramMap = reqInstance.params;
 
     String accountType = paramMap.get('type');
-    
+
     //Dynamic SOQL
     String query = 'SELECT id, name, phone, type, (SELECT id, name FROM Opportunities), (SELECT id, firstName, lastName, email FROM contacts) FROM Account';
 
-    if(accountType != null){
+    if (accountType != null) {
       query += ' WHERE type = :accountType';
     }
 
-    return Database.query(query);     
+    return Database.query(query);
   }
-
 
   /*
     Create Account, Contact and Opportunity with API 
@@ -30,71 +28,67 @@ global class AccountsAndChildData {
   */
   @HttpPost
   global static void createAccountAndChild() {
-      
     RestRequest reqInstance = RestContext.request;
-    String jsonString = reqInstance.requestBody.toString();
+    String jsonString = reqInstance.requestBody.toString(); //Every request body comes in JSON format, so we need to convert/serialize it to String format.
 
-    AccountAndChildWrapper wrapperInstance = (AccountAndChildWrapper)(JSON.deserialize(jsonString, AccountAndChildWrapper.class));//Request body in String format.
+    AccountAndChildWrapper wrapperInstance = (AccountAndChildWrapper) (JSON.deserialize(
+      jsonString,AccountAndChildWrapper.class)); //Request body in String format.
 
-    if(wrapperInstance != null && wrapperInstance.account != null){
-
+    if (wrapperInstance != null && wrapperInstance.account != null) {
       Account accInstance = new Account(
         Name = wrapperInstance.account.name,
         Type = wrapperInstance.account.type,
         Phone = wrapperInstance.account.phone
       );
+
       insert accInstance;
 
-      if(wrapperInstance.contact != null){
-
+      if (wrapperInstance.contact != null) {
         Contact conInstance = new Contact(
-        AccountId = accInstance.id,
-        FirstName = wrapperInstance.contact.firstName,
-        LastName = wrapperInstance.Contact.lastName,
-        Email = wrapperInstance.contact.email
+          AccountId = accInstance.id,
+          FirstName = wrapperInstance.contact.firstName,
+          LastName = wrapperInstance.Contact.lastName,
+          Email = wrapperInstance.contact.email
         );
 
         insert conInstance;
       }
 
-      if(wrapperInstance.opportunity != null){
-
+      if (wrapperInstance.opportunity != null) {
         Opportunity oppInstance = new Opportunity(
-        AccountId = accInstance.id,
-        Name = wrapperInstance.Opportunity.name,
-        StageName = wrapperInstance.Opportunity.stageName,
-        CloseDate = wrapperInstance.Opportunity.closeDate
+          AccountId = accInstance.id,
+          Name = wrapperInstance.Opportunity.name,
+          StageName = wrapperInstance.Opportunity.stageName,
+          CloseDate = wrapperInstance.Opportunity.closeDate
         );
 
         insert oppInstance;
       }
     }
   }
-    
+
   //Wrapper class/inner class (Class in class)
   public class AccountAndChildWrapper {
-
     public AccountWrapper account;
     public ContactWrapper contact;
     public OpportunityWrapper opportunity;
   }
-  
+
   public class AccountWrapper {
     public String name;
     public String type;
     public String phone;
   }
-  
+
   public class OpportunityWrapper {
     public String name;
     public String stageName;
     public Date closeDate;
   }
-  
+
   public class ContactWrapper {
     public String firstName;
     public String lastName;
     public String email;
   }
 }
-

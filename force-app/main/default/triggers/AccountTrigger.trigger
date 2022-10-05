@@ -1,4 +1,22 @@
 trigger AccountTrigger on Account(before insert, before update, after update, after insert) {
+  
+  if(Trigger.isUpdate){
+    if(Trigger.isBefore){
+      AccountTriggerHandler.beforeUpdatePhoneDescrip(Trigger.new, Trigger.oldMap);
+    }else if(Trigger.isAfter){
+      AccountTriggerHandler.updateRelatedOppPhone(Trigger.new, Trigger.oldMap);
+      AccountTriggerHandler.updateTheSameRecordAfterEvent(Trigger.new, Trigger.oldMap);
+    }
+  }
+
+  //========================================================================
+  // if(Trigger.isInsert){
+  //   if(Trigger.isBefore){
+  //     AccountTriggerHandler.beforeInsert(Trigger.new);
+  //   }else if(Trigger.isAfter){
+  //     AccountTriggerHandler.afterInsert(Trigger.new);
+  //   }
+  // }
   //========================================================================
   // if(Trigger.isAfter && (Trigger.isInsert || Trigger.isUpdate)){
   //   AccountTriggerHandler.createOppIfAccNoOpp(Trigger.new);
@@ -56,15 +74,15 @@ trigger AccountTrigger on Account(before insert, before update, after update, af
   //   AccountTriggerHandler.smallGroupAcc(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
   // }
   //========================================================================
-  if (trigger.isBefore) {
-    system.debug('before insert/update trigger on account object');
-    AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
-  }
+  // if (trigger.isBefore) {
+  //   system.debug('before insert/update trigger on account object');
+  //   AccountTriggerHandler.updateAccountDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+  // }
   //========================================================================
-   if(Trigger.isAfter && Trigger.isUpdate) {
-     //call updateVIPforAllContacts method.
-     AccountTriggerHandler.updateVIPForAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
-    }
+  //  if(Trigger.isAfter && Trigger.isUpdate) {
+  //    //call updateVIPforAllContacts method.
+  //    AccountTriggerHandler.updateVIPForAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+  //   }
 
   //AFTER EVENT TRIGGER EXAMPLE
 

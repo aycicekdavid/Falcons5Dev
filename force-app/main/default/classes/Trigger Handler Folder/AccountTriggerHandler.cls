@@ -1,5 +1,116 @@
 public class AccountTriggerHandler {
 
+//CREATING AN ACCOUNT RECORD: We use befor insert event for creating a new record.
+public static void beforeInsert(List<Account> newList) {
+        
+  for(Account acc : newList){
+
+      if(acc.Type == 'Prospect'){
+          acc.Industry = 'Apparel';
+      }
+  }    
+}
+
+//==============================================================
+
+//CREATING A RELATED OBJECT RECORD: Since we need account Id, we have to use after insert event.
+public static void afterInsert(List<Account> newTrigger) {
+  List<Opportunity> newOpp = new List<Opportunity>();
+  List<Contact> newCon = new List<Contact>();
+
+  for(account acc : newTrigger){
+      Opportunity opp = new Opportunity();
+      opp.AccountId = acc.Id;
+      opp.name = acc.Name + ' ' + acc.Type;
+      opp.CloseDate = System.today();
+      opp.StageName = 'Prospecting';
+      
+      newOpp.add(opp);
+
+      Contact con = new Contact();
+      con.AccountId = acc.Id;
+      con.LastName = acc.Name;
+      newCon.add(con);
+  }
+
+  if(newOpp.size()>0 && newCon.size()>0)
+  insert newOpp;
+  insert newCon;
+}
+
+//===============================================================
+
+//BEFORE UPDATE: If Account phone is updated put update message in description.
+
+public static void beforeUpdatePhoneDescrip(List<Account> newTrigger, Map<Id,Account> oldMap) {
+
+  for(Account acc : newTrigger){
+    if(acc.Phone != oldMap.get(acc.Id).Phone){
+      acc.Description ='The phone number has been updated on ' + acc.LastModifiedDate + '\n by ' + acc.OwnerId;
+    }
+  }
+}
+//===============================================================
+
+//AFTER UPDATE - UPDATE RELATED RECORD: If Account phone is udated then populate that on all related opportunities.
+
+public static void updateRelatedOppPhone(List<Account> newTrigger, Map<id,account> oldMap) {
+
+  Set<Id> accId = new Set<id>();
+  List<Opportunity> oppToBeUpdated = new List<Opportunity>();
+
+  for(Account acc : newTrigger){
+    if(acc.Phone != oldMap.get(acc.Id).Phone){
+      accId.add(acc.Id);
+    }
+  }
+
+  for(Opportunity opp : [select AccountId, Description from Opportunity where AccountId IN :accId]){
+    Opportunity o = new Opportunity();
+    if(accId.contains(opp.AccountId)){
+       o.id = opp.id;
+       o.Description = 'Opportunity updated because of account phone updated.';
+       oppToBeUpdated.add(o);
+    }
+  }
+  if(oppToBeUpdated.size()>0){
+    update oppToBeUpdated;
+  }
+}
+
+//===============================================================
+
+//AFTER UPDATE - UPDATE SAME RECORD: If Account phone is udated then update the Website to checked
+
+public static void updateTheSameRecordAfterEvent(List<Account> newTrigger, Map<id,account> oldMap) {
+
+  //for loop to check if phone updated
+  //Get the id of phone updated in a set
+  //Create a List for the records to be updated
+  //Then if list is not empty update it
+
+  List<Account> accToBeUpdated = new List<Account>();
+
+  for(Account acc : newTrigger){
+    if(acc.Phone != oldMap.get(acc.id).Phone){
+      Account a = new Account();
+      a.id = acc.id;
+      a.Website = 'www.google.com';
+      a.NumberOfEmployees = 2000;
+      
+      accToBeUpdated.add(a);
+    }
+  }
+  if(accToBeUpdated.size()>0){
+    update accToBeUpdated;
+  }
+
+
+
+  
+}
+
+//===============================================================
 //Write a trigger that creates opportunity record if the account doesn't contain at least one opportunity
 
 public static void createOppIfAccNoOpp(List<Account> newTrigger) {
