@@ -1,4 +1,47 @@
 public class ContactTriggerHandler {
+
+  //Roll-up the count of Contacts on NumOfContacts field on Account objcet
+  public static void rollUpOnAccountInsertUpdateUndelete(List<Contact> newTrigger){
+    
+    Set<Id> accIds = new Set<Id>();
+
+    for(Contact con : newTrigger){
+      if(con.AccountId != null){
+        accIds.add(con.AccountId);
+      }
+    }
+
+    List<Account> accList = [SELECT Id, Number_of_Contact__c, (SELECT id FROM Contacts) FROM Account WHERE Id IN:accIds];
+
+    for(Account acc : accList){
+      acc.Number_of_Contact__c = acc.Contacts.size();
+    }
+
+    if(accList.size() > 0){
+      update accList;
+    }
+  } 
+
+  public static void rollUpOnAccountDelete(List<Contact> oldTrigger){
+
+    Set<Id> accIds = new Set<Id>();
+
+    for(Contact con : oldTrigger){
+      if(con.AccountId != null){
+        accIds.add(con.AccountId);
+      }
+    }
+
+    List<Account> accList = [SELECT Id, Number_of_Contact__c, (SELECT id FROM Contacts) FROM Account WHERE Id IN:accIds];
+
+    for(Account acc : accList){
+      acc.Number_of_Contact__c = acc.Contacts.size();
+    }
+
+    if(accList.size() > 0){
+      update accList;
+    }
+  }
   //================================================================
   //If a user try to delete a contact which has no account, it should get error message.
 
